@@ -1,0 +1,89 @@
+plugins {
+	id 'org.springframework.boot' version '2.1.8.RELEASE'
+	id 'io.spring.dependency-management' version '1.0.8.RELEASE'
+	id 'java'
+}
+
+group = 'com.lordvault.pokemon'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '1.8'
+
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
+
+
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	compileOnly 'org.projectlombok:lombok'
+	compile("org.springframework.boot:spring-boot-starter-thymeleaf")
+	annotationProcessor 'org.projectlombok:lombok'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}
+
+def webappDir = "$projectDir/src/main/resources/angular/pidgeycalc/"
+def distappDir = "$projectDir/src/main/resources/angular/pidgeycalc/dist/pidgeycalc/"
+def staticContent = "$projectDir/src/main/resources/static/"
+def dataContent = "$projectDir/src/main/resources/data/"
+
+clean.doFirst {
+	file("$staticContent").deleteDir();
+	file("$staticContent").mkdir();
+}
+
+processResources {
+	dependsOn "copyAngularFiles"
+}
+
+task buildAngular(type:Exec) {
+	// installAngular should be run prior to this task
+	dependsOn "installAngular"
+	workingDir "$webappDir"
+	inputs.dir "$webappDir"
+	// Add task to the standard build group
+	group = BasePlugin.BUILD_GROUP
+	// ng doesn't exist as a file in windows -> ng.cmd
+	if (System.getProperty("os.name").toUpperCase().contains("WINDOWS")){
+		commandLine "ng.cmd", "build"
+	} else {
+		commandLine "ng", "build"
+	}
+}
+
+task copyAngularFiles {
+	dependsOn "buildAngular"
+	copy {
+		from "$distappDir"
+		into "$staticContent"
+	}
+
+	copy {
+		from "$dataContent"
+		into "$staticContent"
+	}
+	doLast {
+		println 'Copy complete'
+	}
+}
+
+bootJar{
+	exclude("**/BOOT-INF/classes/angular/*")
+}
+
+task installAngular(type:Exec) {
+	workingDir "$webappDir"
+	inputs.dir "$webappDir"
+	group = BasePlugin.BUILD_GROUP
+	if (System.getProperty("os.name").toUpperCase().contains("WINDOWS")){
+		commandLine "npm.cmd", "install"
+	} else {
+		commandLine "npm", "install"
+	}
+}

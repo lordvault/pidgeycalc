@@ -1,0 +1,32 @@
+[
+  {
+    "number": 10,
+    "name": "Caterpie",
+    "requiredCandiesToEvolve": 12
+  },
+  {
+    "number": 13,
+    "name": "Weedle",
+    "requiredCandiesToEvolve": 12
+  },
+  {
+    "number": 16,
+    "name": "Pidgey",
+    "requiredCandiesToEvolve": 12
+  },
+  {
+    "number": 265,
+    "name": "Wurmple",
+    "requiredCandiesToEvolve": 12
+  },
+  {
+    "number": 293,
+    "name": "Whismur",
+    "requiredCandiesToEvolve": 12
+  },
+  {
+    "number": 519,
+    "name": "Pidove",
+    "requiredCandiesToEvolve": 12
+  }
+]

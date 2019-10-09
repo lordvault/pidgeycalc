@@ -17,5 +17,6 @@ public class CalcEvolutionsResponse {
     long spendTime;
     int totalEvolutions;
     int totalExperience;
-
+    int totalTransfersTodoFirst;
+    String notes;
 }

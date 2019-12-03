@@ -37,12 +37,12 @@ clean.doFirst {
 }
 
 processResources {
-	dependsOn "copyAngularFiles"
+	//dependsOn "copyAngularFiles"
 }
 
 task buildAngular(type:Exec) {
 	// installAngular should be run prior to this task
-	//dependsOn "installAngular"
+	dependsOn "installAngular"
 	workingDir "$webappDir"
 	inputs.dir "$webappDir"
 	// Add task to the standard build group

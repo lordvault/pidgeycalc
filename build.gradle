@@ -14,7 +14,7 @@ configurations {
 	}
 }
 
-
+installAngular.enable = false;
 
 repositories {
 	mavenCentral()

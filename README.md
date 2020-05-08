@@ -1,4 +1,15 @@
-PIDGEYCALC
+<h1>PIDGEYCALC</h1>
+
+Pidgey calc is an application created to apply some adquired knowledge on Java and Angular technologies. 
+
+![Heroku](https://heroku-badge.herokuapp.com/?app=pidgey-calc)
+
+At this moment the application have includede the following technologies: 
+ - Spring boot
+ - Gradle
+ 
+As CI/CD is included the use of: 
+ - Heroku 
 
 Funtions:
 
@@ -9,7 +20,7 @@ Funtions:
 
 - localhost:8081/api/calculate:
 Inside body: 
-`{
+```{
   "listToCalculate": [
     {
       "referencePokemon": {
@@ -66,4 +77,4 @@ Inside body:
       "pokemonQuantity": 8
     }
   ]
-}`
+}```
